@@ -54,7 +54,7 @@ public class Main
 
             FindKey FK = new FindKey();
             Scanner commandLine = new Scanner(System.in);
-            System.out.println("======> Key Finder Project <======");
+            System.out.println("Program is being run");
 
             do 
             {

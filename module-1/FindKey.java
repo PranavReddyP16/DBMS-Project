@@ -116,7 +116,7 @@ public class FindKey
             String rhs = split[1];
             String lhs = split[0];
 
-            // Sort left hand side alphabetically (due to how the HashMap works, AB!=BA)
+            // Sort left hand side alphabetically (in HashMaps, AB!=BA)
             lhs = FindKey.sortString(lhs).toString();
             HashSet<String> lhsHashSet = new HashSet<String>();
             for (Character C : lhs.toCharArray()) 
@@ -124,7 +124,7 @@ public class FindKey
                 lhsHashSet.add(C.toString());
             }
 
-            // Sort left hand side alphabetically (due to how the HashMap works, AB!=BA)
+            // Sort right hand side alphabetically
             HashSet<String> rhsHashSet = new HashSet<String>();
             for (Character C : rhs.toCharArray()) 
             {

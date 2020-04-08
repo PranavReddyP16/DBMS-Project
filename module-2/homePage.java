@@ -83,7 +83,7 @@ public class homePage extends javax.swing.JFrame {
         search_button.setBounds(590, 30, 100, 40);
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\M SREINIVAS REDDY\\Downloads\\dbs2proj1.jpg")); // NOI18N
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 840, 460);
 

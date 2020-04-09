@@ -16,14 +16,9 @@ public class Main
         }
     }
 
-    public static ArrayList<String> getCombinations(ArrayList<Attribute> attributes) 
+    public static ArrayList<String> getCombinations(ArrayList<String> chars) 
     {
         ArrayList<String> result = new ArrayList<String>();
-        ArrayList<String> chars = new ArrayList<String>();
-        for(int i=0;i<chars.size();i++)
-        {
-            chars.add(attributes.get(i).name);
-        }
         String str = new String();
         for (String c : chars) 
         {

@@ -4,11 +4,11 @@ public class FindKey
 {
 
     Map<HashSet<String>, HashSet<String>> fdMap;
-    ArrayList<Attribute> attributeList;
+    ArrayList<String> attributeList;
 
     public FindKey() 
     {
-        this.attributeList = new ArrayList<Attribute>();
+        this.attributeList = new ArrayList<String>();
         this.fdMap = new HashMap<HashSet<String>, HashSet<String>>();
     }
 
@@ -103,7 +103,7 @@ public class FindKey
 
         for (String s : attrSplit) 
         {
-            attributeList.add(new Attribute(s));
+            attributeList.add(s.substring(0,1));
         }
     }
 

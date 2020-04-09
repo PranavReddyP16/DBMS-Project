@@ -16,11 +16,12 @@ public class Directory {
         directory[1].arr[3]=1;
         System.out.println("directory successffully created");
     }
-    
-    
-    // if global depth is more than local depth - to increment the size of the directory
-    public void gd_inc(Directory dir)
+    public int gd_inc(Directory dir)
     {
+        if(dir.gd==4)
+        {
+            return -1;
+        }
         int curr_dir_size=1;
             int new_dir_size;
             for(int i=0;i<dir.gd;i++)
@@ -33,24 +34,21 @@ public class Directory {
                 dir.directory[i]=dir.directory[i-curr_dir_size];
             }
             (dir.gd)++;
+            return 1;
     }
-    
-    
-    // inserting an element 
-    public void insert_dir(int hash_val,int key,Directory dir)
+    public int insert_dir(int hash_val,int key,Directory dir)
     {
+        int ret;
         int current_size = 1;
         for(int i=0;i<dir.gd;i++)
         {
             current_size*=2;
         }
-        dir.directory[(hash_val%current_size)].insert(key,dir.gd,dir);
+        ret = dir.directory[(hash_val%current_size)].insert(key,dir.gd,dir);
         System.out.println("returned to orig");
         dir.print(dir);
+        return ret;
     }
-    
-    
-    // prints to console - testing purpose
     public void print(Directory dir)
     {
         int current_size=1;
@@ -74,6 +72,27 @@ public class Directory {
                 }
             }
             System.out.print("\n");
+        }
+    }
+    public int search(Directory dir,int key)
+    {
+        int mod;
+        boolean ans;
+        int l=1;
+        for(int i=0;i<gd;i++)
+        {
+            l*=2;
+        }
+        mod=key%l;
+        ans=dir.directory[mod].sear(key,dir);
+        System.out.println("elemnt is "+ans);
+        if(ans==true)
+        {
+            return mod;
+        }
+        else
+        {
+            return -1;
         }
     }
 }

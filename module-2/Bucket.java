@@ -18,8 +18,7 @@ public class Bucket {
         arr[3]=-1;
         System.out.println("bucket successful");
     }
-    // insert function
-    void insert(int key,int gd,Directory dir)
+    int insert(int key,int gd,Directory dir)
     {
         if(a_full==false)
         {
@@ -38,19 +37,27 @@ public class Bucket {
         }
         else if(gd>ld)
         {
-            ld_inc(dir,key);
+            int ret = ld_inc(dir,key);
+            return ret;
         }
         else
         {
-            dir.gd_inc(dir);
+            int ret;
+            ret = dir.gd_inc(dir);
+            if(ret==1){
             System.out.println("gd is done");
             ld_inc(dir,key);
             System.out.println("ld is called");
+            return 1;
+            }
+            else
+            {
+                return -1;
+            }
         }
+        return 1;
     }
-   
-   // when local depth is less than global depth - just to create a new bucket
-   void ld_inc(Directory dir,int key)
+    int ld_inc(Directory dir,int key)
     {
         //System.out.println("bucket called");
         Bucket buc=new Bucket();
@@ -160,12 +167,45 @@ public class Bucket {
             }
             if(k==0)
             {
+                if(this.c_full==true)
+                {
+                    return -1;
+                }
                 this.insert(key,dir.gd,dir);
             }
             else
             {
+                if(this.c_full==true)
+                {
+                    return -1;
+                }
                 buc.insert(key,dir.gd,dir);
             }
-            
+            return 1;
+    }
+    boolean sear(int key,Directory dir)
+    {
+        if(a_full==true)
+        {
+            if(a==key)
+            {
+                return true;
+            }
+        }
+        if(b_full==true)
+        {
+            if(b==key)
+            {
+                return true;
+            }
+        }
+        if(c_full==true)
+        {
+            if(c==key)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

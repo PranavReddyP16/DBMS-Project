@@ -1,9 +1,5 @@
 package dbs2;
 public class homePage extends javax.swing.JFrame {
-
-    /**
-     * Creates new form homePage
-     */
     public homePage() {
         initComponents();
         dir= new Directory();
@@ -83,7 +79,7 @@ public class homePage extends javax.swing.JFrame {
         search_button.setBounds(590, 30, 100, 40);
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\M SREINIVAS REDDY\\Downloads\\dbs2proj1.jpg")); // NOI18N
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("jlabel2");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 840, 460);
 
@@ -107,16 +103,20 @@ public class homePage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    //inserting an element 
     private void insert_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
         int key =Integer.parseInt(ins_key_inp.getText());
         int hash_val=key%16;
-        dir.insert_dir(hash_val,key,dir);
+        int ret =  dir.insert_dir(hash_val,key,dir);
+        if(ret==1){
         print_gui(dir);
+        }
+        else
+        {
+            op_box.setText("this element cant be inserted");
+        }
     }                                             
 
-    //prints on the gui
     public void print_gui(Directory dir)
     {
         int current_size=1;
@@ -147,18 +147,28 @@ public class homePage extends javax.swing.JFrame {
                 op_box.append(String.valueOf(k[j]));
             }
             op_box.append("\t");
+//            for(int j=0;j<;j++)
+//            {
+//                op_box.append(" ");
+//            }
             if(dir.directory[i].a_full==true)
             {
+                //System.out.print(dir.directory[i].a);
+                //System.out.print(" ");
                 op_box.append(String.valueOf(dir.directory[i].a));
                 if(dir.directory[i].b_full==true)
                 {
+                    //System.out.print(dir.directory[i].b);
+                    //System.out.print(" ");
                     op_box.append(String.valueOf(","+dir.directory[i].b));
                     if(dir.directory[i].c_full==true)
                     {
+                        //System.out.print(dir.directory[i].c);
                         op_box.append(String.valueOf(","+dir.directory[i].c));
                     }
                 }
             }
+            //System.out.print("\n");
             op_box.append("\t\t"+dir.directory[i].ld+"\n");
         }
     }
@@ -168,6 +178,36 @@ public class homePage extends javax.swing.JFrame {
 
     private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
+        int key = Integer.parseInt(ins_key_inp.getText());
+        int val;
+        val = dir.search(dir,key);
+        if(val==-1)
+        {
+            op_box.setText("element not found");
+        }
+        else
+        {
+            op_box.setText("element found at bucket from pointer at ");
+            int temp=val;
+            int[] k=new int[4];
+            //int val=0;
+            for(int j=0;j<4;j++)
+            {
+                k[j]=temp%2;
+                temp=temp/2;
+                //int l;
+                //for(l=0;l<j;l++)
+                //{
+                //    k=k*10;
+                //}
+                //val=(10*val)+k;
+            }
+            for(int j=3;j>=0;j--)
+            {
+                op_box.append(String.valueOf(k[j]));
+            }
+           // op_box.append("\t");
+        }
     }                                             
 
     /**

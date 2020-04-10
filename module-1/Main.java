@@ -96,7 +96,11 @@ public class Main
                     keys.add(i);
                 }
 
+                NormalForm NF = new NormalForm(keys,FK);
+                NF.printNormalForm(NF);
+
                 FK = new FindKey();
+                NF = new NormalForm(keys,FK);
 
             } while (true);
         } 

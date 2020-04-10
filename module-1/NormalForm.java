@@ -103,4 +103,9 @@ public class NormalForm
         if(flag1==1) return false;
         else return true;
     }
+
+    public void printNormalForm(NormalForm NF)
+    {
+        System.out.println("The highest Normal Form for this database model is : " + NF.NF);
+    }
 }

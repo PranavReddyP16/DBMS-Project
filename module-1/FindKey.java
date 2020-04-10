@@ -5,11 +5,15 @@ public class FindKey
 
     Map<HashSet<String>, HashSet<String>> fdMap;
     ArrayList<String> attributeList;
+    HashSet<String> leftHandSide;
+    HashSet<String> rightHandSide;
 
     public FindKey() 
     {
         this.attributeList = new ArrayList<String>();
         this.fdMap = new HashMap<HashSet<String>, HashSet<String>>();
+        this.leftHandSide = new HashSet<String>();
+        this.rightHandSide = new HashSet<String>();
     }
 
     public HashSet<String> getCandidateKeys() 
@@ -129,6 +133,15 @@ public class FindKey
             for (Character C : rhs.toCharArray()) 
             {
                 rhsHashSet.add(C.toString());
+            }
+
+            for(String i : lhsHashSet)
+            {
+                leftHandSide.add(i);
+            }
+            for(String i : rhsHashSet)
+            {
+                rightHandSide.add(i);
             }
 
             fdMap.put(lhsHashSet, rhsHashSet);

@@ -28,6 +28,25 @@ public class Main
         return result;
     }
 
+    public static boolean checkSubstring(String a, String b)
+    {
+        int i = 0;
+        int j = 0;
+        for (i=0; i<a.length(); i++)
+        {
+            for (j = 0; j<b.length(); j++)
+            {
+               if(b.charAt(i) == a.charAt(j))
+                  break;
+            }
+
+            if (j == b.length())
+               return false;
+        }
+
+        return true;
+    }
+
     public static HashSet<String> closure(HashSet<String> attributes, Map<HashSet<String>, HashSet<String>> dependencies) 
     {
         HashSet<String> closureSet = new HashSet<String>(attributes);
@@ -53,7 +72,7 @@ public class Main
 
             do 
             {
-                System.out.print("Enter the attributes as: A,B,... or Type Exit ");
+                System.out.print("Enter the attributes as: A,B,... or Type Exit to quit the program : ");
                 String attributes = commandLine.next();
                 if (attributes.equalsIgnoreCase("exit")) 
                 {
@@ -61,7 +80,7 @@ public class Main
                 }
                 FK.addAttributes(attributes);
 
-                System.out.print("Enter the FDs as: A->B,AC->B,... or Type Exit ");
+                System.out.print("Enter the FDs as: A->B,AC->B,... or Type Exit to quit the program : ");
                 String fd = commandLine.next();
                 if (fd.equalsIgnoreCase("exit")) 
                 {
@@ -70,6 +89,12 @@ public class Main
 
                 FK.addFD(fd);
                 System.out.println(" \n\n ==> The candidate keys are: " + FK.getCandidateKeys() + "\n\n");
+
+                HashSet<String> keys = new HashSet<String>();
+                for(String i : FK.getCandidateKeys())
+                {
+                    keys.add(i);
+                }
 
                 FK = new FindKey();
 

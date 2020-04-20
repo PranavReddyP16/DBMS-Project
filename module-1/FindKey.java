@@ -4,6 +4,7 @@ public class FindKey
 {
 
     Map<HashSet<String>, HashSet<String>> fdMap;
+    Map<String, String> functionalDependencyMap;
     ArrayList<String> attributeList;
     HashSet<String> leftHandSide;
     HashSet<String> rightHandSide;
@@ -12,6 +13,7 @@ public class FindKey
     {
         this.attributeList = new ArrayList<String>();
         this.fdMap = new HashMap<HashSet<String>, HashSet<String>>();
+        this.functionalDependencyMap = new HashMap<String, String>();
         this.leftHandSide = new HashSet<String>();
         this.rightHandSide = new HashSet<String>();
     }
@@ -120,6 +122,11 @@ public class FindKey
             String rhs = split[1];
             String lhs = split[0];
 
+            leftHandSide.add(lhs);
+            rightHandSide.add(rhs);
+
+            functionalDependencyMap.put(lhs,rhs);
+
             // Sort left hand side alphabetically (in HashMaps, AB!=BA)
             lhs = FindKey.sortString(lhs).toString();
             HashSet<String> lhsHashSet = new HashSet<String>();
@@ -133,15 +140,6 @@ public class FindKey
             for (Character C : rhs.toCharArray()) 
             {
                 rhsHashSet.add(C.toString());
-            }
-
-            for(String i : lhsHashSet)
-            {
-                leftHandSide.add(i);
-            }
-            for(String i : rhsHashSet)
-            {
-                rightHandSide.add(i);
             }
 
             fdMap.put(lhsHashSet, rhsHashSet);

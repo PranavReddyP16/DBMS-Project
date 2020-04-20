@@ -32,19 +32,19 @@ public class Main
     {
         int i = 0;
         int j = 0;
-        for (i=0; i<a.length(); i++)
+        for (i=0; i<a.length()-b.length(); i++)
         {
             for (j = 0; j<b.length(); j++)
             {
-               if(b.charAt(i) == a.charAt(j))
+               if(b.charAt(j) != a.charAt(i+j))
                   break;
             }
 
             if (j == b.length())
-               return false;
+               return true;
         }
 
-        return true;
+        return false;
     }
 
     public static HashSet<String> closure(HashSet<String> attributes, Map<HashSet<String>, HashSet<String>> dependencies) 

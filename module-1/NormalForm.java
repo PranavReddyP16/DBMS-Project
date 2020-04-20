@@ -17,31 +17,18 @@ public class NormalForm
             }
         }
 
-        int flag=0;
-        for(Map.Entry<HashSet<String>,HashSet<String>> entry : FK.fdMap.entrySet())
+        for(Map.Entry<String, String> entry : FK.functionalDependencyMap.entrySet())
         {
-            String lhs = "";
-            String rhs = "";
-            for(String s : entry.getKey())
-            {
-                lhs.concat(s);
-            }
-            for(String s : entry.getValue())
-            {
-                rhs.concat(s);
-            }
 
-            if(isSuperKey(lhs,keys)==false&&isPrimeAttribute(rhs,keys)==false)
+            if(isSuperKey(entry.getKey(),keys)==false&&isPrimeAttribute(entry.getValue(),keys)==false)
             {
                 this.NF = 2;
-                flag=1;
-                break;
+                return;
             }
 
         }
-        if(flag==1) return;
 
-        flag=0;
+        int flag=0;
         for(String i : FK.leftHandSide)
         {
             if(isSuperKey(i,keys)==false)

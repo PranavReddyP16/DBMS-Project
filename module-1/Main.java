@@ -27,23 +27,46 @@ public class Main
         Main.f("", str, result);
         return result;
     }
-
     public static boolean checkSubstring(String a, String b)
     {
         int i = 0;
         int j = 0;
-        for (i=0; i<a.length()-b.length(); i++)
+        for (i=0; i<=a.length()-b.length(); i++)
         {
+            //System.out.println("for i val "+i);
             for (j = 0; j<b.length(); j++)
             {
                if(b.charAt(j) != a.charAt(i+j))
                   break;
             }
-
-            if (j == b.length())
-               return true;
+            //System.out.println("reavhed "+j);
+            if (j == b.length()){
+                //System.out.println("returning true from checkSubStr");
+                return true;
+            }
         }
-
+        //System.out.println("returning false from checkSubStr");
+        return false;
+    }
+    public static boolean checkSubstr(String a, String b)
+    {
+        int i = 0;
+        int j = 0;
+        for (i=0; i<a.length()-b.length(); i++)
+        {
+            //System.out.println("for i val "+i);
+            for (j = 0; j<b.length(); j++)
+            {
+               if(b.charAt(j) != a.charAt(i+j))
+                  break;
+            }
+            //System.out.println("reavhed "+j);
+            if (j == b.length()){
+                //System.out.println("returning true from checkSubStr");
+                return true;
+            }
+        }
+        //System.out.println("returning false from checkSubStr");
         return false;
     }
 

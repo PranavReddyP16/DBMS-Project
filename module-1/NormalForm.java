@@ -8,9 +8,11 @@ public class NormalForm
     {
         for(String i : FK.leftHandSide)
         {
+            //System.out.println("lhs : "+i);
             for(String j : keys)
             {
-                if(Main.checkSubstring(j,i))
+                //System.out.println("key : "+j);
+                if(Main.checkSubstr(j,i))
                 {
                     return;
                 }
@@ -49,8 +51,10 @@ public class NormalForm
     public boolean isSuperKey(String i,HashSet<String> keys)
     {
         int flag1=0;
+        //System.out.println("i "+i);
         for(String j : keys)
         {
+            //System.out.println("j "+j);
             if(Main.checkSubstring(i,j)==true)
             {
                 flag1=1;
@@ -59,10 +63,12 @@ public class NormalForm
         }
         if(flag1==0)
         {
+            //System.out.println("return false from superkey");
             return false;
         }
         else
         {
+            //System.out.println("return true from superkey");
             return true;
         }
     }

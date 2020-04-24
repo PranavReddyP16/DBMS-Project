@@ -6,11 +6,11 @@ public class NormalForm
 
     public NormalForm(HashSet<String> keys, FindKey FK)
     {
-        for(String i : FK.leftHandSide)
+        for(Map.Entry<String, String> entry : FK.functionalDependencyMap.entrySet())
         {
             for(String j : keys)
             {
-                if(Main.checkSubstring(j,i))
+                if(!isPrimeAttribute(entry.getValue(), keys) || Main.checkIncompleteSubstring(j,entry.getKey()))
                 {
                     return;
                 }

@@ -28,6 +28,26 @@ public class Main
         return result;
     }
 
+    public static boolean checkIncompleteSubstring(String a, String b)
+    {
+        if(a.length()==b.length()) return false;
+
+        int i = 0;
+        int j = 0;
+        for (i=0; i<a.length()-b.length(); i++)
+        {
+            for (j = 0; j<b.length(); j++)
+            {
+               if(b.charAt(j) != a.charAt(i+j))
+                  break;
+            }
+
+            if (j == b.length())
+               return true;
+        }
+
+        return false;
+    }
     public static boolean checkSubstring(String a, String b)
     {
         int i = 0;

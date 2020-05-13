@@ -12,16 +12,16 @@ public class NormalForm
             HashMap<String, String> currentFunctionalDependency = new HashMap<String, String>();
             currentFunctionalDependency.put(entry.getKey(), entry.getKey());
             individualNormalForms.put(currentFunctionalDependency, 1);
-            int fla=0;
+            int flag=0;
             for(String j : keys)
             {
                 if(!isPrimeAttribute(entry.getValue(), keys) && Main.checkIncompleteSubstring(j,entry.getKey()))
                 {
-                    fla=1;
+                    flag=1;
                     break;
                 }
             }
-            if(fla==1)
+            if(flag==1)
                 continue;
             if(isSuperKey(entry.getKey(),keys)==false&&isPrimeAttribute(entry.getValue(),keys)==false)
             {
@@ -66,6 +66,23 @@ public class NormalForm
         }
 
         this.NF = totalMinimumFD;
+
+        System.out.println("Create new tables with the following functional dependencies : \n");
+        for(HashMap<String, String> i : minimumFDs)
+        {
+            for(HashMap.Entry<String, String> entry : i.entrySet())
+            {
+                String lhs,rhs;
+                rhs = "";
+                lhs = entry.getKey();
+                for(char j : entry.getValue().toCharArray())
+                {
+                    if(isPrimeAttribute(String.valueOf(j),keys)) rhs += String.valueOf(j);
+                }
+
+                System.out.println(lhs + "->" + rhs + "\n");
+            }
+        }
 
     }
 

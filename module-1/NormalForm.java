@@ -14,7 +14,7 @@ public class NormalForm
             individualNormalForms.put(currentFunctionalDependency, 1);
             for(String j : keys)
             {
-                if(!isPrimeAttribute(entry.getValue(), keys) || Main.checkIncompleteSubstring(j,entry.getKey()))
+                if(!isPrimeAttribute(entry.getValue(), keys) && Main.checkIncompleteSubstring(j,entry.getKey()))
                 {
                     break;
                 }

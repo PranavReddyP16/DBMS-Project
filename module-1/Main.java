@@ -52,7 +52,7 @@ public class Main
     {
         int i = 0;
         int j = 0;
-        for (i=0; i<a.length()-b.length(); i++)
+        for (i=0; i<=a.length()-b.length(); i++)
         {
             for (j = 0; j<b.length(); j++)
             {

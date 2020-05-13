@@ -12,20 +12,29 @@ public class NormalForm
             HashMap<String, String> currentFunctionalDependency = new HashMap<String, String>();
             currentFunctionalDependency.put(entry.getKey(), entry.getKey());
             individualNormalForms.put(currentFunctionalDependency, 1);
+            int fla=0;
             for(String j : keys)
             {
                 if(!isPrimeAttribute(entry.getValue(), keys) && Main.checkIncompleteSubstring(j,entry.getKey()))
                 {
+                    fla=1;
                     break;
                 }
             }
+            if(fla==1)
+                continue;
             if(isSuperKey(entry.getKey(),keys)==false&&isPrimeAttribute(entry.getValue(),keys)==false)
             {
                 individualNormalForms.replace(currentFunctionalDependency,2);
-                break;
+                continue;
             }
-
-            int flag=0;
+            if(isSuperKey(entry.getKey(),keys)==false)
+            {
+                individualNormalForms.replace(currentFunctionalDependency,3);
+                continue;
+            }
+            individualNormalForms.replace(currentFunctionalDependency,4);
+            /*int flag=0;
             for(char i : entry.getKey().toCharArray())
             {
                 if(isSuperKey(Character.toString(i),keys)==false)
@@ -40,7 +49,7 @@ public class NormalForm
             {
                 individualNormalForms.replace(currentFunctionalDependency,4);
                 return;
-            }
+            }*/
         }
 
         int totalMinimumFD = 4;

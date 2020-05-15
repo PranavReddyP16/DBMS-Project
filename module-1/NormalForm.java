@@ -71,7 +71,7 @@ public class NormalForm
         this.NF = totalMinimumFD;
         if(this.NF!=4)
         {
-            System.out.println("Create new tables with the following functional dependencies 1: \n");
+            System.out.println("Create new tables with the following functional dependencies : \n");
             for(HashMap<String, String> i : minimumFDs)
             { 
                 //System.out.println("entered");

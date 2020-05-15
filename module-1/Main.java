@@ -30,9 +30,10 @@ public class Main
 
     public static boolean checkIncompleteSubstring(String a, String b)
     {
+        //System.out.println("new funcyion for patial");
         if(a.length()==b.length()) return false;
-
-        int i = 0;
+        
+        /*int i = 0;
         int j = 0;
         for (i=0; i<=a.length()-b.length(); i++)
         {
@@ -44,16 +45,71 @@ public class Main
 
             if (j == b.length())
                return true;
+        }*/
+        int found_prime=0;
+        int found_all=1;
+        for(char g: a.toCharArray())
+        {
+            int flag=0;
+            for(char h: b.toCharArray())
+            {
+                if(h==g)
+                {
+                    found_prime=1;
+                    flag=1;
+                }
+            }
+            if(flag==0)
+            {
+                found_all=0;
+            }
         }
-
+        int found_non_prime=0;
+        int dlag=0;
+        for(char c: b.toCharArray())
+        {
+            dlag=0;
+            for(char d: a.toCharArray())
+            {
+                if(c==d)
+                {
+                    dlag=1;
+                    break;
+                }
+            }
+            if(dlag==0)
+            {
+                found_non_prime=1;
+            }
+        }
+        if(found_non_prime==1)
+        {
+            //System.out.println("since found a non-prime attr"+a+" "+b);
+            return false;
+        }
+        if(found_prime==1&&found_all==0)
+        {
+            //System.out.println("found only a few"+a+" "+b);
+            return true;
+        }
+        if(found_prime==1&&found_all==1)
+        {
+            //System.out.println("found all attrs"+a+" "+b);
+            return false;
+        }
+        if(found_prime==0)
+        {
+            //System.out.println("found none"+a+" "+b);
+            return false;
+        }
         return false;
     }
     public static boolean checkSubstring(String a, String b)
     {
-        int i = 0;
+        /*int i = 0;
         int j = 0;
         for (i=0; i<=a.length()-b.length(); i++)
-        {
+        { 
             for (j = 0; j<b.length(); j++)
             {
                if(b.charAt(j) != a.charAt(i+j))
@@ -64,7 +120,25 @@ public class Main
                return true;
         }
 
-        return false;
+        return false;*/
+        //System.out.println("new funcyion"); 
+        for(char g: a.toCharArray())
+        {
+            int flag=0;
+            for(char h: b.toCharArray())
+            {
+                if(h==g)
+                {
+                    
+                    flag=1;
+                }
+            }
+            if(flag==0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static HashSet<String> closure(HashSet<String> attributes, Map<HashSet<String>, HashSet<String>> dependencies) 

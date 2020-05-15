@@ -10,18 +10,19 @@ public class NormalForm
         for(HashMap.Entry<String, String> entry : FK.functionalDependencyMap.entrySet())
         {
             HashMap<String, String> currentFunctionalDependency = new HashMap<String, String>();
-            currentFunctionalDependency.put(entry.getKey(), entry.getKey());
+            currentFunctionalDependency.put(entry.getKey(), entry.getValue());
             individualNormalForms.put(currentFunctionalDependency, 1);
-            int flag=0;
+            int fla=0;
             for(String j : keys)
             {
-                if(!isPrimeAttribute(entry.getValue(), keys) && Main.checkIncompleteSubstring(j,entry.getKey()))
+                //System.out.println("Main.checkIncompleteSubstring-"+j+" "+entry.getKey()+" "+Main.checkIncompleteSubstring(j,entry.getKey()));
+                if( Main.checkIncompleteSubstring(j, entry.getKey())&&!isPrimeAttribute(entry.getValue(), keys))
                 {
-                    flag=1;
-                    break;
-                }
+                    fla=1;
+                    break; 
+                }                    
             }
-            if(flag==1)
+            if(fla==1)
                 continue;
             if(isSuperKey(entry.getKey(),keys)==false&&isPrimeAttribute(entry.getValue(),keys)==false)
             {
@@ -34,29 +35,31 @@ public class NormalForm
                 continue;
             }
             individualNormalForms.replace(currentFunctionalDependency,4);
-            /*int flag=0;
-            for(char i : entry.getKey().toCharArray())
+            /*for(char i : entry.getKey().toCharArray())
             {
                 if(isSuperKey(Character.toString(i),keys)==false)
                 {
                     flag=1;
                     individualNormalForms.replace(currentFunctionalDependency,3);
-                    break;
+                    continue;
                 }
             }
-            if(flag==1) return;
+            if(flag==1) 
+                continue;
             else
             {
                 individualNormalForms.replace(currentFunctionalDependency,4);
-                return;
+                continue;
             }*/
+            
         }
-
+        //System.out.println("even this\n");
         int totalMinimumFD = 4;
         ArrayList<HashMap<String, String>> minimumFDs = new ArrayList<HashMap<String, String>>();
 
         for(HashMap.Entry<HashMap<String, String>, Integer> entry : individualNormalForms.entrySet())
         {
+            //System.out.println(entry.getKey()+" - "+entry.getValue());
             if(entry.getValue() < totalMinimumFD) totalMinimumFD = entry.getValue();
         }
 
@@ -66,24 +69,36 @@ public class NormalForm
         }
 
         this.NF = totalMinimumFD;
-
-        System.out.println("Create new tables with the following functional dependencies : \n");
-        for(HashMap<String, String> i : minimumFDs)
+        if(this.NF!=4)
         {
-            for(HashMap.Entry<String, String> entry : i.entrySet())
-            {
-                String lhs,rhs;
-                rhs = "";
-                lhs = entry.getKey();
-                for(char j : entry.getValue().toCharArray())
-                {
-                    if(isPrimeAttribute(String.valueOf(j),keys)) rhs += String.valueOf(j);
-                }
+            System.out.println("Create new tables with the following functional dependencies 1: \n");
+            for(HashMap<String, String> i : minimumFDs)
+            { 
+                //System.out.println("entered");
 
-                System.out.println(lhs + "->" + rhs + "\n");
+                for(HashMap.Entry<String, String> entry : i.entrySet())
+                {
+                    String lhs,rhs;
+                    rhs = "";
+                    lhs = entry.getKey();
+                    if(this.NF!=3){
+                        for(char j : entry.getValue().toCharArray())
+                        {
+                            if(!isPrimeAttribute(String.valueOf(j),keys)) 
+                            {
+                                rhs += String.valueOf(j);
+                                //System.out.println("adding "+j);
+                            }
+                        }
+                    }
+                    else
+                    {                        
+                        rhs=entry.getValue();
+                    }
+                    System.out.println(lhs + "->" + rhs + "\n");
+                }
             }
         }
-
     }
 
     public boolean isSuperKey(String i,HashSet<String> keys)
@@ -91,7 +106,7 @@ public class NormalForm
         int flag1=0;
         for(String j : keys)
         {
-            if(Main.checkSubstring(i,j)==true)
+            if(Main.checkSubstring(j,i)==true)
             {
                 flag1=1;
                 break;
@@ -115,7 +130,7 @@ public class NormalForm
             int flag2=0;
             for(String k : keys)
             {
-                if(Main.checkSubstring(k,Character.toString(j))==true) 
+                if(Main.checkSubstring(Character.toString(j),k)==true) 
                 {
                     flag2=1;
                     break;
@@ -127,6 +142,7 @@ public class NormalForm
                 break;
             }
         }
+        //System.out.println("")
         if(flag1==1) return false;
         else return true;
     }

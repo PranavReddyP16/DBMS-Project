@@ -1,4 +1,3 @@
-package dbs2;
 public class Bucket {
     int a,b,c,ld;
     int[] arr;

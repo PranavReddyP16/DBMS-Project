@@ -1,5 +1,8 @@
-package dbs2;
 public class homePage extends javax.swing.JFrame {
+
+    /**
+     * Creates new form homePage
+     */
     public homePage() {
         initComponents();
         dir= new Directory();

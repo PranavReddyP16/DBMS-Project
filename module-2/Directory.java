@@ -1,4 +1,3 @@
-package dbs2;
 public class Directory {
     Bucket[] directory= new Bucket[16];
     int gd = 2;    
